@@ -20,7 +20,7 @@ var log = logrus.New()
 
 // Config pulls in environment variables
 type Config struct {
-	Port        string `default:"10000"`
+	Port        string `default:"8080"`
 	DbUser      string `default:"alinea"`
 	DbPassword  string `default:"alinea"`
 	DbHost      string `default:"alinea-db"`
