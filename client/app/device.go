@@ -2,7 +2,7 @@ package main
 
 import "database/sql"
 
-// Device describes a PushyGo server on a Device
+// Device describes a Alinea server on a Device
 type Device struct {
 	ID          string             `json:"id,omitempty"`
 	Name        string             `json:"name"`

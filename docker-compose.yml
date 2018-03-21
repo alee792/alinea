@@ -1,17 +1,17 @@
 version: '3'
 services:
   db:
-    container_name: pushygo-db
+    container_name: alinea-db
     image: postgres
     environment:
-      POSTGRES_USER: pushygo
-      POSTGRES_PASSWORD: pushygo
+      POSTGRES_USER: alinea
+      POSTGRES_PASSWORD: alinea
     volumes:
       - ./db/initialize.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
   app:
-    container_name: pushygo-web
+    container_name: alinea-web
     build: ./client
     ports:
       - "8080:8080"

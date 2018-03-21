@@ -19,15 +19,15 @@ var log = logrus.New()
 // Config pulls in environment variables
 type Config struct {
 	Port        string `default:"8080"`
-	DbUser      string `default:"pushygo"`
-	DbPassword  string `default:"pushygo"`
-	DbHost      string `default:"pushygo-db"`
+	DbUser      string `default:"alinea"`
+	DbPassword  string `default:"alinea"`
+	DbHost      string `default:"alinea-db"`
 	DbPort      int    `default:"5432"`
-	DbName      string `default:"pushygo"`
+	DbName      string `default:"alinea"`
 	Environment string `default:"dev"`
 }
 
-// App describes the PushyGo web client
+// App describes the Alinea web client
 type App struct {
 	Router *mux.Router
 	DB     *sql.DB
