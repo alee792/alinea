@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <form action="/device" id="createDeviceForm" method="post">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" name="name" type="text" placeholder="Device Name">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">URL</label>
+                    <div class="control">
+                        <input class="input" name="url" type="text" placeholder="http://192.168.1.13:8000">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Location</label>
+                    <div class="control">
+                        <input class="input" name="location" type="text" placeholder="Living Room">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Description</label>
+                    <div class="control">
+                        <input class="input" name="description" type="text" placeholder="Puppy cams only">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" name="active" value="true"> Activate? </a>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button type="submit" value="Submit" class="button is-link">Submit</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-text">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

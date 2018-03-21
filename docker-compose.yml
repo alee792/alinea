@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    container_name: pushygo-db
+    image: postgres
+    environment:
+      POSTGRES_USER: pushygo
+      POSTGRES_PASSWORD: pushygo
+    volumes:
+      - ./db/initialize.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+  app:
+    container_name: pushygo-web
+    build: ./client
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    restart: always

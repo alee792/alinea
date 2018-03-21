@@ -1,0 +1,21 @@
+syntax = "proto3";
+package content; 
+
+service ContentPush {
+    rpc PushContent(Content) returns (PushResponse) {}
+    rpc GetContent(ContentRequest) returns (Content) {}
+}
+
+message Content {
+    string targetURL = 1;
+    int32 reloadSeconds = 2;    
+    string scrollIntoView = 3;
+}
+
+message PushResponse {
+    bool success = 1;
+}
+
+message ContentRequest {
+
+}
