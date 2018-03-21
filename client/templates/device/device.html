@@ -53,7 +53,7 @@
                                     <input type="hidden" name="deviceID" value={{.ID}}>
                                     <p class="control">
                                         <span class="select">
-                                            <select  name="pushType" form="pushForm">
+                                            <select >
                                                 {{range $i, $v := $actions}}
                                                 <option value={{$v}}> {{$i}}</option>
                                                 {{end}}
@@ -61,7 +61,7 @@
                                         </span>
                                     </p>
                                     <p class="control">
-                                        <input class="input" name="target" type="text" placeholder="URL/ID">
+                                        <input class="input" name="Content.targetURL" type="text" placeholder="URL/ID">
                                     </p>
                                     <p class="control">
                                         <button type="submit" value="Submit" class="button is-success">

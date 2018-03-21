@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"net/http"
@@ -10,6 +11,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
 	"github.com/kelseyhightower/envconfig"
+	_ "github.com/lib/pq"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
@@ -18,7 +20,7 @@ var log = logrus.New()
 
 // Config pulls in environment variables
 type Config struct {
-	Port        string `default:"8080"`
+	Port        string `default:"10000"`
 	DbUser      string `default:"alinea"`
 	DbPassword  string `default:"alinea"`
 	DbHost      string `default:"alinea-db"`
@@ -131,16 +133,19 @@ func (a *App) pushContent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	client := pb.NewContentPushClient(conn)
-	client.PushContent(nil, &f.Content, nil)
+	var opts []grpc.CallOption
+	pr, err := client.PushContent(context.Background(), &f.Content, opts...)
 	if err != nil {
 		respondWithError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+	respondWithJSON(w, http.StatusAccepted, pr)
 }
 
 func dialService(address string) (conn *grpc.ClientConn, err error) {
 	var opts []grpc.DialOption
 	opts = append(opts, grpc.WithBackoffMaxDelay(1*time.Second))
+	opts = append(opts, grpc.WithInsecure())
 	conn, err = grpc.Dial(address, opts...)
 	if err != nil {
 		return

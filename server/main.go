@@ -31,8 +31,19 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	grpcServer := grpc.NewServer()
-	pb.RegisterContentPushServer(grpcServer, &server{})
+	s := new()
+	pb.RegisterContentPushServer(grpcServer, s)
+	log.Infof("Listening on %d.", *port)
 	grpcServer.Serve(lis)
+}
+
+// New instantiates a server from the given context
+func new() *server {
+	c, err := chromedp.New(context.Background(), chromedp.WithLog(func(string, ...interface{}) {}))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return &server{CDP: c}
 }
 
 // PushContent pushes content to a server to display
