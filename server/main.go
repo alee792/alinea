@@ -84,7 +84,7 @@ func (s *server) getURL() (url string) {
 	task := chromedp.Tasks{
 		chromedp.Location(&url),
 	}
-	s.CDP.Run(nil, task)
+	s.CDP.Run(context.Background(), task)
 	return
 }
 
@@ -93,13 +93,13 @@ func (s *server) hideScrollbar() error {
 	task := chromedp.Tasks{
 		chromedp.Evaluate("document.body.style.overflow = 'hidden'", buf),
 	}
-	return s.CDP.Run(nil, task)
+	return s.CDP.Run(context.Background(), task)
 }
 
 func (s *server) navigate(url string) error {
 	s.cancelReload()
 	log.WithFields(log.Fields{"target": url}).Infof("Navigating to content.")
-	return s.CDP.Run(nil, chromedp.Tasks{chromedp.Navigate(url), chromedp.Sleep(1 * time.Second)})
+	return s.CDP.Run(context.Background(), chromedp.Tasks{chromedp.Navigate(url), chromedp.Sleep(1 * time.Second)})
 }
 
 func (s *server) reload() error {
@@ -107,7 +107,7 @@ func (s *server) reload() error {
 	task := chromedp.Tasks{
 		chromedp.Reload(),
 	}
-	return s.CDP.Run(nil, task)
+	return s.CDP.Run(context.Background(), task)
 }
 
 func (s *server) reloadInterval(interval time.Duration) (err error) {
